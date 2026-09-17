@@ -9,6 +9,13 @@
     .splash { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #ffb7c5; display: flex; justify-content: center; align-items: center; z-index: 9999; animation: fadeOut 2.5s ease-in-out 2.5s forwards; pointer-events: none; overflow: hidden; }
     .splash h1 { color: white; font-size: 2.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); z-index: 10; }
     @keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
+    
+    .loader-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(255, 240, 245, 0.95); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+    .loader-screen.active { opacity: 1; pointer-events: auto; }
+    .penlight-stick { width: 20px; height: 60px; background: linear-gradient(135deg, #ffb7c5, #ffffff); border-radius: 10px; margin-bottom: 15px; box-shadow: 0 0 15px #ff69b4; animation: bounce 0.6s infinite alternate; }
+    .loader-text { color: #d1498b; font-weight: bold; font-size: 1.1rem; text-align: center; }
+    @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+
     .container { max-width: 600px; margin: 20px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); animation: fadeIn 2s ease-in-out 3s both; }
     @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
     .site-title { color: #d1498b; text-align: center; font-size: 1.5rem; padding: 15px; margin: 0; background-color: white; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
@@ -53,6 +60,11 @@
 
 <div class="splash" id="splash">
     <h1>Sakulovely Fansite</h1>
+</div>
+
+<div class="loader-screen" id="loaderScreen">
+    <div class="penlight-stick"></div>
+    <div class="loader-text">ペンライトカラーはサクラピンクとホワイト！</div>
 </div>
 
 <div style="position: sticky; top: 0; z-index: 100;">
@@ -156,15 +168,22 @@
 
 <script>
     function showPage(pageId) {
-        document.getElementById('page-home').style.display = 'none';
-        document.getElementById('page-news-list').style.display = 'none';
-        document.getElementById('page-news-detail-1').style.display = 'none';
-        document.getElementById('page-live-list').style.display = 'none';
-        document.getElementById('page-goods-list').style.display = 'none';
-        document.getElementById('page-app-detail').style.display = 'none';
+        const loader = document.getElementById('loaderScreen');
+        loader.classList.add('active');
         
-        document.getElementById('page-' + pageId).style.display = 'block';
-        window.scrollTo(0, 0);
+        setTimeout(function() {
+            document.getElementById('page-home').style.display = 'none';
+            document.getElementById('page-news-list').style.display = 'none';
+            document.getElementById('page-news-detail-1').style.display = 'none';
+            document.getElementById('page-live-list').style.display = 'none';
+            document.getElementById('page-goods-list').style.display = 'none';
+            document.getElementById('page-app-detail').style.display = 'none';
+            
+            document.getElementById('page-' + pageId).style.display = 'block';
+            window.scrollTo(0, 0);
+            
+            loader.classList.remove('active');
+        }, 500);
     }
 
     const splash = document.getElementById('splash');
