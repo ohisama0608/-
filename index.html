@@ -12,7 +12,9 @@
     
     .loader-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(255, 240, 245, 0.95); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
     .loader-screen.active { opacity: 1; pointer-events: auto; }
-    .penlight-stick { width: 20px; height: 60px; background: linear-gradient(135deg, #ffb7c5, #ffffff); border-radius: 10px; margin-bottom: 15px; box-shadow: 0 0 15px #ff69b4; animation: bounce 0.6s infinite alternate; }
+    .penlights-container { display: flex; gap: 15px; margin-bottom: 15px; }
+    .penlight-stick { width: 20px; height: 60px; background: linear-gradient(135deg, #ffb7c5, #ffffff); border-radius: 10px; box-shadow: 0 0 15px #ff69b4; animation: bounce 0.6s infinite alternate; }
+    .penlight-stick:nth-child(2) { animation-delay: 0.2s; }
     .loader-text { color: #d1498b; font-weight: bold; font-size: 1.1rem; text-align: center; }
     @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
 
@@ -63,7 +65,10 @@
 </div>
 
 <div class="loader-screen" id="loaderScreen">
-    <div class="penlight-stick"></div>
+    <div class="penlights-container">
+        <div class="penlight-stick"></div>
+        <div class="penlight-stick"></div>
+    </div>
     <div class="loader-text">ペンライトカラーはサクラピンクとホワイト！</div>
 </div>
 
@@ -183,7 +188,7 @@
             window.scrollTo(0, 0);
             
             loader.classList.remove('active');
-        }, 500);
+        }, 1200);
     }
 
     const splash = document.getElementById('splash');
