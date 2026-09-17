@@ -46,11 +46,17 @@
     .breaking-news { background-color: #fff0f5; color: #d1498b; padding: 10px 20px; text-align: left; font-size: 0.9rem; font-weight: bold; cursor: pointer; border-bottom: 1px solid #ffb7c5; transition: background-color 0.3s; }
     .breaking-news:hover { background-color: #ffe4e1; }
 
-    .video-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 15px 20px; background-color: #ffffff; border-bottom: 2px solid #ffb7c5; scrollbar-width: none; }
+    .video-container-wrapper { position: relative; background-color: #ffffff; border-bottom: 2px solid #ffb7c5; }
+    .video-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 15px 40px; scrollbar-width: none; }
     .video-slider::-webkit-scrollbar { display: none; }
-    .video-card { flex: 0 0 80%; max-width: 300px; scroll-snap-align: center; background: #fff0f5; padding: 12px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
-    .video-card p { font-weight: bold; color: #d1498b; margin: 0 0 8px 0; font-size: 0.85rem; }
-    .video-card iframe { width: 100%; height: 160px; border: none; border-radius: 6px; }
+    .video-card { flex: 0 0 90%; max-width: 540px; margin: 0 auto; scroll-snap-align: center; background: #fff0f5; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; box-sizing: border-box; }
+    .video-card p { font-weight: bold; color: #d1498b; margin: 0 0 8px 0; font-size: 0.95rem; }
+    .video-card iframe { width: 100%; height: 220px; border: none; border-radius: 6px; }
+    
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(209, 73, 139, 0.8); color: white; border: none; font-size: 1.2rem; padding: 12px 8px; cursor: pointer; z-index: 10; border-radius: 4px; transition: background-color 0.3s; }
+    .slider-btn:hover { background-color: #c21e5c; }
+    .slider-btn-left { left: 5px; }
+    .slider-btn-right { right: 5px; }
 
     @media (min-width: 768px) { 
         .banner-en { font-size: 26px; }
@@ -60,7 +66,7 @@
         #page-home { text-align: left; }
         #page-home .section { display: inline-block; width: 47%; margin-right: 3%; vertical-align: top; box-sizing: border-box; }
         #page-home .section:nth-child(even) { margin-right: 0; }
-        .video-card { flex: 0 0 30%; }
+        .video-card { flex: 0 0 70%; }
     }
     
     .news-item { cursor: pointer; background-color: #fff0f5; padding: 15px; border-radius: 8px; margin-bottom: 15px; transition: background-color 0.3s; }
@@ -107,23 +113,27 @@
     <div class="breaking-news" onclick="showPage('news-detail-1')">
         📣 【NEWS】ファンサイトを公開しました
     </div>
-    <div class="video-slider">
-        <div class="video-card">
-            <p>空飛ぶ車MV</p>
-            <iframe src="https://www.youtube.com/embed/" allowfullscreen></iframe>
+    <div class="video-container-wrapper">
+        <button class="slider-btn slider-btn-left" onclick="scrollVideoSlider(-1)">＜</button>
+        <div class="video-slider" id="videoSlider">
+            <div class="video-card">
+                <p>空飛ぶ車MV</p>
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" allowfullscreen></iframe>
+            </div>
+            <div class="video-card">
+                <p>好きになるクレッシェンドコール動画</p>
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" allowfullscreen></iframe>
+            </div>
+            <div class="video-card">
+                <p>イチャイチャ虫MV</p>
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3" allowfullscreen></iframe>
+            </div>
+            <div class="video-card">
+                <p>桜を射止める王子様</p>
+                <iframe src="https://www.youtube.com/embed/H6plBachsAo" allowfullscreen></iframe>
+            </div>
         </div>
-        <div class="video-card">
-            <p>好きになるクレッシェンドコール動画</p>
-            <iframe src="https://www.youtube.com/embed/" allowfullscreen></iframe>
-        </div>
-        <div class="video-card">
-            <p>イチャイチャ虫MV</p>
-            <iframe src="https://www.youtube.com/embed/" allowfullscreen></iframe>
-        </div>
-        <div class="video-card">
-            <p>桜を射止める王子様</p>
-            <iframe src="https://www.youtube.com/embed/H6plBachsAo" allowfullscreen></iframe>
-        </div>
+        <button class="slider-btn slider-btn-right" onclick="scrollVideoSlider(1)">＞</button>
     </div>
 </div>
 
@@ -184,6 +194,7 @@
     <h2>ライブ情報</h2>
     <p>各ライブのバナーを押すと公式サイトの詳細ページへ移動します。</p>
     <a href="https://www.hinatazaka46.com/s/official/page/hinachri2026" target="_blank" class="link-btn">ひなくり2026 特設サイトへ</a>
+    <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
 <div id="page-goods-list" class="container" style="display: none;">
@@ -193,12 +204,14 @@
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%82%BF%E3%82%AA%E3%83%BC%E3%83%AB" target="_blank" class="link-btn">個人タオルを購入する</a>
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" class="link-btn">個人アクスタを購入する</a>
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C" target="_blank" class="link-btn">ランダムグッズ等その他を見る</a>
+    <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
 <div id="page-app-detail" class="container" style="display: none;">
     <h2>メッセージアプリ</h2>
     <p>メンバーからの着信や日常のメッセージを受け取れます。</p>
     <a href="https://www.hinatazaka46.com/s/h46app/page/app_guide" target="_blank" class="link-btn">日向坂46メッセージ 公式サイトへ</a>
+    <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
 <script type="text/javascript">
@@ -230,6 +243,12 @@
             
             loader.classList.remove('active');
         }, 1200);
+    }
+
+    function scrollVideoSlider(direction) {
+        const slider = document.getElementById('videoSlider');
+        const scrollAmount = slider.clientWidth * 0.8;
+        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
 
     const splash = document.getElementById('splash');
