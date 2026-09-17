@@ -98,11 +98,18 @@
 
 <div id="page-news-list" class="container" style="display: none;">
     <h2>ニュース一覧</h2>
-    <div class="news-item">
+    <div class="news-item" onclick="showPage('news-detail-1')">
         <p class="news-date">2026年9月17日</p>
         <p class="news-title">ファンサイトを公開しました</p>
-        <p>松尾桜さんの推し活をより快適にする非公式サイトをオープンしました。スケジュールや各種リンクを随時まとめているので日々の応援に役立ててください。</p>
     </div>
+</div>
+
+<div id="page-news-detail-1" class="container" style="display: none;">
+    <h2>ニュース詳細</h2>
+    <p class="news-date">2026年9月17日</p>
+    <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">ファンサイトを公開しました</p>
+    <p>松尾桜さんの推し活をより快適にする非公式サイトをオープンしました。スケジュールや各種リンクを一つにまとめているので日々の応援に役立ててください。</p>
+    <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
 </div>
 
 <div id="page-live-list" class="container" style="display: none;">
@@ -115,7 +122,7 @@
     <h2>松尾桜 公式グッズ</h2>
     <p>推しメンのアイテムを揃えて応援しましょう。</p>
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%83%9A%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%88" target="_blank" class="link-btn">個人ペンライトを購入する</a>
-    <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%82%BF%E3%82%AA%E3%83%AB" target="_blank" class="link-btn">個人タオルを購入する</a>
+    <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%82%BF%E3%82%AA%E3%83%BC%E3%83%AB" target="_blank" class="link-btn">個人タオルを購入する</a>
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C%E3%80%80%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%89" target="_blank" class="link-btn">個人アクスタを購入する</a>
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C" target="_blank" class="link-btn">ランダムグッズ等その他を見る</a>
 </div>
@@ -141,6 +148,7 @@
     function showPage(pageId) {
         document.getElementById('page-home').style.display = 'none';
         document.getElementById('page-news-list').style.display = 'none';
+        document.getElementById('page-news-detail-1').style.display = 'none';
         document.getElementById('page-live-list').style.display = 'none';
         document.getElementById('page-goods-list').style.display = 'none';
         document.getElementById('page-app-detail').style.display = 'none';
