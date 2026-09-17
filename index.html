@@ -29,9 +29,10 @@
     .lemino-color:hover { background-color: #e60053; }
     
     .top-banner { display: flex; justify-content: space-around; background-color: #ffb7c5; padding: 10px 0; }
-    .banner-link { color: white; text-decoration: none; font-weight: bold; font-size: 12px; cursor: pointer; }
+    .banner-link { color: white; text-decoration: none; font-weight: bold; font-size: 12px; cursor: pointer; padding: 6px 12px; border-radius: 15px; transition: background 0.3s ease; }
+    .banner-link:hover { background: linear-gradient(135deg, #ff69b4, #ff1493); }
     @media (min-width: 768px) { 
-        .banner-link { font-size: 18px; }
+        .banner-link { font-size: 18px; padding: 8px 16px; }
         .container { max-width: 900px; }
         #page-home { text-align: left; }
         #page-home .section { display: inline-block; width: 47%; margin-right: 3%; vertical-align: top; box-sizing: border-box; }
