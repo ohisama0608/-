@@ -121,8 +121,8 @@
             <span class="banner-ja">アプリ</span>
         </a>
     </div>
-    <div class="breaking-news" onclick="showPage('news-detail-1')">
-        📣 ファンサイトを公開しました
+    <div class="breaking-news" onclick="showPage('news-detail-2')">
+        📣 アンケート設置のおしらせ
     </div>
 </div>
 
@@ -203,10 +203,23 @@
 
 <div id="page-news-list" class="container" style="display: none;">
     <h2>ニュース一覧</h2>
+    <div class="news-item" onclick="showPage('news-detail-2')">
+        <p class="news-date">2026年9月18日</p>
+        <p class="news-title">アンケート設置のおしらせ</p>
+    </div>
     <div class="news-item" onclick="showPage('news-detail-1')">
         <p class="news-date">2026年9月17日</p>
         <p class="news-title">ファンサイトを公開しました</p>
     </div>
+</div>
+
+<div id="page-news-detail-2" class="container" style="display: none;">
+    <h2>ニュース詳細</h2>
+    <p class="news-date">2026年9月18日</p>
+    <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">アンケート設置のおしらせ</p>
+    <p>サイトのサービス向上のために皆さんのご意見ご感想を募るアンケートを設置しました。本サイトについてもっとこういう機能があればいいのになや、ここを改善してほしいなどたくさんお待ちしております。いただいたものは今後随時更新、追加していくつもりです。ご協力をお願いします。</p>
+    <p style="margin-top:20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank" style="color:#ff69b4; font-weight:bold; text-decoration:underline;">アンケートはこちら</a>←こちらの文字をクリックすれば飛べるようになっています。</p>
+    <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
 </div>
 
 <div id="page-news-detail-1" class="container" style="display: none;">
@@ -269,6 +282,7 @@
             document.getElementById('page-home').style.display = 'none';
             document.getElementById('page-news-list').style.display = 'none';
             document.getElementById('page-news-detail-1').style.display = 'none';
+            document.getElementById('page-news-detail-2').style.display = 'none';
             document.getElementById('page-live-list').style.display = 'none';
             document.getElementById('page-goods-list').style.display = 'none';
             document.getElementById('page-app-detail').style.display = 'none';
