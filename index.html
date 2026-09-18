@@ -146,7 +146,7 @@
         <h2>最新ブログ</h2>
         <div class="blog-card">
             <a href="https://www.hinatazaka46.com/s/official/diary/member/list?ima=0000&ct=46" target="_blank" id="blogLink" style="display: flex; text-decoration: none; color: inherit; gap: 15px; align-items: center;">
-                <img id="blogImage" src="" alt="サムネイル" style="width: 90px; height: 90px; object-fit: cover; border-radius: 6px; background-color: #ddd; flex-shrink: 0;">
+                <div style="width: 90px; height: 90px; display: flex; justify-content: center; align-items: center; font-size: 2.5rem; background-color: #ffe4e1; border-radius: 6px; flex-shrink: 0;">📖</div>
                 <div>
                     <div id="blogDate" style="font-size: 0.8rem; color: #888; margin-bottom: 5px;">読み込み中</div>
                     <div id="blogTitle" style="font-size: 0.95rem; color: #333; font-weight: bold;">最新のブログ情報を取得しています</div>
@@ -183,7 +183,7 @@
 
     <div class="section">
         <h2>番組見逃し配信サイト</h2>
-        <p>外番組はTVer、ひなあい まだひなはLeminoで！</p>
+        <p>外番組はTVer、ひなあい・まだひなはLeminoで！</p>
         <a href="https://tver.jp/" target="_blank" class="streaming-btn tver-color">TVerで視聴する</a>
         <a href="https://lemino.docomo.ne.jp/" target="_blank" class="streaming-btn lemino-color">Leminoで視聴する</a>
 
@@ -305,9 +305,6 @@
                 document.getElementById('blogDate').textContent = data.date;
                 document.getElementById('blogTitle').textContent = data.title;
                 document.getElementById('blogLink').href = data.link;
-                if(data.image) {
-                    document.getElementById('blogImage').src = data.image;
-                }
             }
         })
         .catch(error => console.log('Blog load error:', error));
