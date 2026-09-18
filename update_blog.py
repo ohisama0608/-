@@ -15,23 +15,26 @@ data = {
 try:
     with urllib.request.urlopen(req) as response:
         html = response.read().decode('utf-8')
-        print("HTML length:", len(html))
         
         links = re.findall(r'<a href="(/s/official/diary/detail/\d+\?ima=\d+&ct=\d+)">', html)
-        images = re.findall(r'<img[^>]+src="(https://cdn\.hinatazaka46\.com/[^"]+)"', html)
-        titles = re.findall(r'<p class="title"><span>(.*?)<\/span><\/p>', html)
-        dates = re.findall(r'<p class="date path"><span>(.*?)<\/span>', html)
+        images = re.findall(r'<img[^>]+src="(https://cdn\.hinatazaka46\.com/files/\d+/diary/official/member/moblog/[^"]+)"', html)
+        titles = re.findall(r'<div class="title"[^>]*>(.*?)<\/div>', html)
+        if not titles:
+            titles = re.findall(r'<p class="title"[^>]*>(.*?)<\/p>', html)
+        dates = re.findall(r'<p class="date path"[^>]*>(.*?)<\/p>', html)
         
-        print("Found titles:", titles)
-        print("Found images:", images)
-        
-        if titles and dates:
-            data["title"] = titles[0].strip()
-            data["date"] = dates[0].strip()
-            if links:
-                data["link"] = "https://www.hinatazaka46.com" + links[0]
-            if images:
-                data["image"] = images[0]
+        if titles:
+            clean_title = re.sub(r'<[^>]+>', '', titles[0]).strip()
+            if clean_title:
+                data["title"] = clean_title
+        if dates:
+            clean_date = re.sub(r'<[^>]+>', '', dates[0]).strip()
+            if clean_date:
+                data["date"] = clean_date
+        if links:
+            data["link"] = "https://www.hinatazaka46.com" + links[0]
+        if images:
+            data["image"] = images[0]
 except Exception as e:
     print(f"Error fetching blog: {e}")
 
