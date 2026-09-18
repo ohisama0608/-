@@ -267,6 +267,15 @@
         
         splash.appendChild(petal);
     }
+    fetch('blog_data.json')
+        .then(response => response.json())
+        .then(data => {
+            if(data.date && data.title) {
+                document.querySelector('.blog-checker-date').textContent = data.date + ' 更新';
+                document.querySelector('.blog-checker-text').textContent = data.title;
+            }
+        })
+        .catch(error => console.log('Blog load error:', error));
 </script>
 </body>
 </html>
