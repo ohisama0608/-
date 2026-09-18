@@ -17,7 +17,7 @@ try:
         html = response.read().decode('utf-8')
         
         links = re.findall(r'<a href="(/s/official/diary/detail/\d+\?ima=\d+&ct=\d+)">', html)
-        images = re.findall(r'<img src="(https://cdn\.hinatazaka46\.com/files/\d+/diary/hinata/[^"]+)"', html)
+        images = re.findall(r'<img[^>]+src="(https://cdn\.hinatazaka46\.com/[^"]+)"', html)
         titles = re.findall(r'<p class="title"><span>(.*?)<\/span><\/p>', html)
         dates = re.findall(r'<p class="date path"><span>(.*?)<\/span>', html)
         
