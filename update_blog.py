@@ -15,11 +15,15 @@ data = {
 try:
     with urllib.request.urlopen(req) as response:
         html = response.read().decode('utf-8')
+        print("HTML length:", len(html))
         
         links = re.findall(r'<a href="(/s/official/diary/detail/\d+\?ima=\d+&ct=\d+)">', html)
         images = re.findall(r'<img[^>]+src="(https://cdn\.hinatazaka46\.com/[^"]+)"', html)
         titles = re.findall(r'<p class="title"><span>(.*?)<\/span><\/p>', html)
         dates = re.findall(r'<p class="date path"><span>(.*?)<\/span>', html)
+        
+        print("Found titles:", titles)
+        print("Found images:", images)
         
         if titles and dates:
             data["title"] = titles[0].strip()
