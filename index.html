@@ -151,8 +151,8 @@
             <span class="banner-ja">アプリ</span>
         </a>
     </div>
-    <div class="breaking-news" onclick="showPage('news-detail-2')">
-        📣 アンケート設置のおしらせ
+    <div class="breaking-news" onclick="showPage('news-detail-3')">
+        📣 新機能『公式動画』について
     </div>
 </div>
 
@@ -233,6 +233,10 @@
 
 <div id="page-news-list" class="container" style="display: none;">
     <h2>ニュース一覧</h2>
+    <div class="news-item" onclick="showPage('news-detail-3')">
+        <p class="news-date">2026年9月20日</p>
+        <p class="news-title">新機能『公式動画』について</p>
+    </div>
     <div class="news-item" onclick="showPage('news-detail-2')">
         <p class="news-date">2026年9月18日</p>
         <p class="news-title">アンケート設置のおしらせ</p>
@@ -244,12 +248,29 @@
     <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
+<div id="page-news-detail-3" class="container" style="display: none;">
+    <h2>ニュース詳細</h2>
+    <p class="news-date">2026年9月20日</p>
+    <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">新機能『公式動画』について</p>
+    <p>松尾桜さんが出演している公式動画（日向坂ちゃんねるとMV）のまとめを作成しました。</p>
+    <p>またその他軽微な修正をいたしました。</p>
+    <p>これからもよろしくお願いします。</p>
+    <p style="margin-top:20px;"><a onclick="showPage('videos')" style="color:#ff69b4; font-weight:bold; text-decoration:underline; cursor:pointer;">『公式動画』まとめはこちら</a></p>
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="https://twitter.com/intent/tweet?text=%E6%9D%BE%E5%B0%BE%E6%A1%9C%E3%81%95%E3%82%93%E6%8E%A8%E3%81%97%E9%9D%9E%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%20%E6%96%B0%E6%A9%9F%E8%83%BD%E3%80%8E%E5%85%AC%E5%BC%8F%E5%8B%95%E7%94%BB%E3%80%8F%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6&url=https://sakulovely-fan-unofficial.netlify.app/" target="_blank" style="background-color: #000; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Xでこのニュースをシェアする</a>
+    </div>
+    <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
+</div>
+
 <div id="page-news-detail-2" class="container" style="display: none;">
     <h2>ニュース詳細</h2>
     <p class="news-date">2026年9月18日</p>
     <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">アンケート設置のおしらせ</p>
     <p>サイトのサービス向上のために皆さんのご意見ご感想を募るアンケートを設置しました。本サイトについてもっとこういう機能があればいいのになや、ここを改善してほしいなどたくさんお待ちしております。いただいたものは今後随時更新、追加していくつもりです。ご協力をお願いします。</p>
     <p style="margin-top:20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank" style="color:#ff69b4; font-weight:bold; text-decoration:underline;">アンケートはこちら</a></p>
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="https://twitter.com/intent/tweet?text=%E6%9D%BE%E5%B0%BE%E6%A1%9C%E3%81%95%E3%82%93%E6%8E%A8%E3%81%97%E9%9D%9E%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%20%E3%82%A2%E3%83%B3%E3%82%B1%E3%83%BC%E3%83%88%E8%A8%AD%E7%BD%AE%E3%81%AE%E3%81%8A%E3%81%97%E3%82%89%E3%81%9B&url=https://sakulovely-fan-unofficial.netlify.app/" target="_blank" style="background-color: #000; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Xでこのニュースをシェアする</a>
+    </div>
     <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
 </div>
 
@@ -258,6 +279,9 @@
     <p class="news-date">2026年9月17日</p>
     <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">ファンサイトを公開しました</p>
     <p>松尾桜さんの推し活をより快適にする非公式サイトをオープンしました。スケジュールや各種リンクを一つにまとめているので日々の応援に役立ててください。</p>
+    <div style="text-align: center; margin: 20px 0;">
+        <a href="https://twitter.com/intent/tweet?text=%E6%9D%BE%E5%B0%BE%E6%A1%9C%E3%81%95%E3%82%93%E6%8E%A8%E3%81%97%E9%9D%9E%E5%85%AC%E5%BC%8F%E3%82%B5%E3%82%A4%E3%83%88%20%E3%83%95%E3%82%A1%E3%83%B3%E3%82%B5%E3%82%A4%E3%83%88%E3%82%92%E5%85%AC%E9%96%8B%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F&url=https://sakulovely-fan-unofficial.netlify.app/" target="_blank" style="background-color: #000; color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">Xでこのニュースをシェアする</a>
+    </div>
     <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
 </div>
 
@@ -377,6 +401,7 @@
             document.getElementById('page-news-list').style.display = 'none';
             document.getElementById('page-news-detail-1').style.display = 'none';
             document.getElementById('page-news-detail-2').style.display = 'none';
+            document.getElementById('page-news-detail-3').style.display = 'none';
             document.getElementById('page-videos').style.display = 'none';
             document.getElementById('page-live-list').style.display = 'none';
             document.getElementById('page-goods-list').style.display = 'none';
