@@ -26,7 +26,7 @@
 
     .container { width: 92%; max-width: 1100px; margin: 25px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); animation: fadeIn 2s ease-in-out 3s both; flex: 1; box-sizing: border-box; }
     @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-    .site-title { color: #d1498b; text-align: center; font-size: 1.5rem; padding: 15px; margin: 0; background-color: white; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .site-title { color: #d1498b; text-align: center; font-size: 1.5rem; padding: 15px 15px 15px 50px; margin: 0; background-color: white; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
     .section { margin-bottom: 30px; }
     h2 { border-bottom: 2px solid #ffb7c5; padding-bottom: 5px; color: #c21e5c; font-size: 1.2rem; }
     p { font-size: 0.9rem; color: #666; line-height: 1.5; }
@@ -66,8 +66,27 @@
 
     .blog-card { background-color: #fff0f5; border: 2px dashed #ffb7c5; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
 
-    .site-footer { width: 100%; background-color: #b0e0e6; text-align: center; padding: 40px 0; margin-top: auto; box-sizing: border-box; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-    .site-footer a { color: #333; text-decoration: none; font-weight: bold; font-size: 0.85rem; display: inline-block; width: auto; }
+    .site-footer { width: 100%; background-color: #b0e0e6; padding: 30px; margin-top: auto; box-sizing: border-box; text-align: left; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; max-width: 600px; margin: 0 auto; }
+    .site-footer a { color: #333; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: color 0.3s; width: fit-content; display: inline-block; }
+    .site-footer a:hover { color: #d1498b; }
+
+    .hamburger-btn { position: fixed; top: 12px; left: 15px; z-index: 1000; font-size: 1.4rem; background: white; padding: 6px 12px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; color: #d1498b; }
+    .side-menu { position: fixed; top: 0; left: -260px; width: 240px; height: 100%; background-color: white; z-index: 1001; box-shadow: 4px 0 10px rgba(0,0,0,0.1); transition: left 0.3s ease; padding: 60px 20px 20px 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 15px; }
+    .side-menu.open { left: 0; }
+    .side-menu a { color: #333; text-decoration: none; font-weight: bold; font-size: 1rem; padding: 10px; border-radius: 6px; transition: background 0.3s; cursor: pointer; }
+    .side-menu a:hover { background-color: #fff0f5; color: #d1498b; }
+    .close-btn { position: absolute; top: 15px; right: 15px; font-size: 1.5rem; cursor: pointer; color: #d1498b; }
+    .menu-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.3); z-index: 1000; display: none; }
+    .menu-overlay.open { display: block; }
+
+    .channel-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+    .channel-tab { background-color: #ffe4e1; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; color: #d1498b; cursor: pointer; transition: background 0.3s; }
+    .channel-tab.active { background-color: #ff69b4; color: white; }
+
+    .video-card-small { flex: 0 0 280px; scroll-snap-align: center; background: #fff0f5; padding: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; box-sizing: border-box; }
+    .video-card-small p { font-weight: bold; color: #d1498b; margin: 0 0 6px 0; font-size: 0.85rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .video-card-small iframe { width: 100%; aspect-ratio: 16 / 9; height: auto; border: none; border-radius: 4px; }
 
     @media (min-width: 768px) { 
         .banner-en { font-size: 26px; }
@@ -99,6 +118,18 @@
     <div class="loader-text">ペンライトカラーはサクラピンクとホワイト！</div>
 </div>
 
+<div class="hamburger-btn" onclick="toggleMenu()">☰</div>
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+<div class="side-menu" id="sideMenu">
+    <div class="close-btn" onclick="toggleMenu()">×</div>
+    <a onclick="showPage('news-list'); toggleMenu();">NEWS</a>
+    <a onclick="showPage('videos'); toggleMenu();">公式動画</a>
+    <a onclick="showPage('live-list'); toggleMenu();">CONCERT</a>
+    <a onclick="showPage('goods-list'); toggleMenu();">GOODS</a>
+    <a onclick="showPage('app-detail'); toggleMenu();">MESSAGE</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank">ご意見ご要望はこちら</a>
+</div>
+
 <div style="position: sticky; top: 0; z-index: 100;">
     <div id="google_translate_element" style="text-align: center; background-color: white; padding-top: 5px;"></div>
     <h1 class="site-title" onclick="showPage('home')">松尾桜さん推し専用応援非公式サイト</h1>
@@ -106,6 +137,10 @@
         <a onclick="showPage('news-list')" class="banner-link">
             <span class="banner-en">NEWS</span>
             <span class="banner-ja">ニュース</span>
+        </a>
+        <a onclick="showPage('videos')" class="banner-link">
+            <span class="banner-en">MOVIES</span>
+            <span class="banner-ja">公式動画</span>
         </a>
         <a onclick="showPage('live-list')" class="banner-link">
             <span class="banner-en">CONCERT</span>
@@ -210,14 +245,15 @@
         <p class="news-date">2026年9月17日</p>
         <p class="news-title">ファンサイトを公開しました</p>
     </div>
+    <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
 <div id="page-news-detail-2" class="container" style="display: none;">
     <h2>ニュース詳細</h2>
     <p class="news-date">2026年9月18日</p>
     <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">アンケート設置のおしらせ</p>
-    <p>サイトのサービス向上のために皆さんのご意見ご感想を募るアンケートを設置しました。本サイトについてもっとこういう機能があればいいのになや、ここを改善してほしいなどたくさんお待ちしております。いただいたものは今後随時更新、追加していくつもりです。ご協力をお願い致します。</p>
-    <p style="margin-top:20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank" style="color:#ff69b4; font-weight:bold; text-decoration:underline;">アンケートはこちら</a>
+    <p>サイトのサービス向上のために皆さんのご意見ご感想を募るアンケートを設置しました。本サイトについてもっとこういう機能があればいいのになや、ここを改善してほしいなどたくさんお待ちしております。いただいたものは今後随時更新、追加していくつもりです。ご協力をお願いします。</p>
+    <p style="margin-top:20px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank" style="color:#ff69b4; font-weight:bold; text-decoration:underline;">アンケートはこちら</a>←こちらの文字をクリックすれば飛べるようになっています。</p>
     <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
 </div>
 
@@ -227,6 +263,62 @@
     <p class="news-title" style="font-size:1.1rem; margin-bottom:15px; color:#333; font-weight:bold;">ファンサイトを公開しました</p>
     <p>松尾桜さんの推し活をより快適にする非公式サイトをオープンしました。スケジュールや各種リンクを一つにまとめているので日々の応援に役立ててください。</p>
     <button onclick="showPage('news-list')" class="link-btn" style="margin-top:20px;">ニュース一覧に戻る</button>
+</div>
+
+<div id="page-videos" class="container" style="display: none;">
+    <h2>公式動画集</h2>
+    <div class="channel-tabs">
+        <button class="channel-tab active" onclick="switchChannel('hinatazaka-ch', event)">日向坂ちゃんねる</button>
+        <button class="channel-tab" onclick="switchChannel('hinatazaka-46', event)">日向坂46</button>
+    </div>
+
+    <div id="channel-hinatazaka-ch" class="video-channel-section">
+        <div class="video-container-wrapper" style="margin: 15px 0;">
+            <button class="slider-btn slider-btn-left" onclick="scrollVideoList('slider-ch', -1)">＜</button>
+            <div class="video-slider" id="slider-ch">
+                <div class="video-card-small"><p>18. オリジナルリズム4ゲーム</p><iframe src="https://www.youtube.com/embed/l5tDRT3_hb8" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>17. 五期生ライブ密着</p><iframe src="https://www.youtube.com/embed/KGkGDjzNNAU" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>16. 鹿島vs横浜FM</p><iframe src="https://www.youtube.com/embed/EBJzwWtJBBU" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>15. 7回目のひな誕祭密着</p><iframe src="https://www.youtube.com/embed/yS4zcD_gPKk" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>14. ワードウルフ</p><iframe src="https://www.youtube.com/embed/yB6mUjbmIIk" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>13. 好きクレコール</p><iframe src="https://www.youtube.com/embed/wA_lovpT5C4" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>12. 冬休み</p><iframe src="https://www.youtube.com/embed/L62qu0jg8lk" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>11. 2026抱負</p><iframe src="https://www.youtube.com/embed/oVUXhTkLYus" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>10. 桜を射止める王子様</p><iframe src="https://www.youtube.com/embed/H6plBachsAo" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>9. 新参者密着</p><iframe src="https://www.youtube.com/embed/6EvLm3VcDzU" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>8. 推し活グッズ開封</p><iframe src="https://www.youtube.com/embed/2To9igmMwgI" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>7. 一風堂</p><iframe src="https://www.youtube.com/embed/tECfWu_d05s" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>6. ひななり潜入</p><iframe src="https://www.youtube.com/embed/O3jt_42tRHA" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>5. 名古屋の歩き方</p><iframe src="https://www.youtube.com/embed/z7Ps-n57VIk" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>4. おもてなし会道のり</p><iframe src="https://www.youtube.com/embed/CiA5Qv2qYsA" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>3. 日向坂五期生に差し入れ</p><iframe src="https://www.youtube.com/embed/dHniiKkgPk8" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>2. 6回目のひな誕祭道のり</p><iframe src="https://www.youtube.com/embed/OX49NzoSKJY" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>1. 初めまして</p><iframe src="https://www.youtube.com/embed/PuBfEY7WAyw" allowfullscreen></iframe></div>
+            </div>
+            <button class="slider-btn slider-btn-right" onclick="scrollVideoList('slider-ch', 1)">＞</button>
+        </div>
+    </div>
+
+    <div id="channel-hinatazaka-46" class="video-channel-section" style="display: none;">
+        <div class="video-container-wrapper" style="margin: 15px 0;">
+            <button class="slider-btn slider-btn-left" onclick="scrollVideoList('slider-46', -1)">＜</button>
+            <div class="video-slider" id="slider-46">
+                <div class="video-card-small"><p>9. イチャイチャ虫</p><iframe src="https://www.youtube.com/embed/mgFUz_c4ToM" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>8. 円周率</p><iframe src="https://www.youtube.com/embed/5lBX4kt4eUI" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>7-2. ひなリハ</p><iframe src="https://www.youtube.com/embed/MITHnz-KHLM" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>7-1. Kind of love</p><iframe src="https://www.youtube.com/embed/W5AGk8Cc7zg" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>6. 茶屋にて</p><iframe src="https://www.youtube.com/embed/GMePoF1ZIDA" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>5. 好きになるクレッシェンド</p><iframe src="https://www.youtube.com/embed/MlNNxI0MNDI" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>4-2. ひなリハ</p><iframe src="https://www.youtube.com/embed/1AAbH-HinaY" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>4-1. クリフハンガー</p><iframe src="https://www.youtube.com/embed/1QDWU8leVQw" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>3. 空飛ぶ車</p><iframe src="https://www.youtube.com/embed/YyGPXrzvfYk" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>2. ジャーマンアイリス</p><iframe src="https://www.youtube.com/embed/F-16wnHQLLw" allowfullscreen></iframe></div>
+                <div class="video-card-small"><p>1. 神対応</p><iframe src="https://www.youtube.com/embed/VAOs0wsTMjU" allowfullscreen></iframe></div>
+            </div>
+            <button class="slider-btn slider-btn-right" onclick="scrollVideoList('slider-46', 1)">＞</button>
+        </div>
+    </div>
+    <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
 
 <div id="page-live-list" class="container" style="display: none;">
@@ -254,7 +346,14 @@
 </div>
 
 <footer class="site-footer">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=publish-editor" target="_blank">ご意見ご要望はこちら</a>
+    <div class="footer-links">
+        <a onclick="showPage('news-list')">NEWS</a>
+        <a onclick="showPage('videos')">公式動画</a>
+        <a onclick="showPage('live-list')">CONCERT</a>
+        <a onclick="showPage('goods-list')">GOODS</a>
+        <a onclick="showPage('app-detail')">MESSAGE</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfBG-7itg32xFdQhsSy3_HuucAjJ8HNAISA4Unyuzy4inP1jg/viewform?usp=dialog" target="_blank">ご意見ご要望はこちら</a>
+    </div>
 </footer>
 
 <script type="text/javascript">
@@ -282,6 +381,7 @@
             document.getElementById('page-news-list').style.display = 'none';
             document.getElementById('page-news-detail-1').style.display = 'none';
             document.getElementById('page-news-detail-2').style.display = 'none';
+            document.getElementById('page-videos').style.display = 'none';
             document.getElementById('page-live-list').style.display = 'none';
             document.getElementById('page-goods-list').style.display = 'none';
             document.getElementById('page-app-detail').style.display = 'none';
@@ -297,9 +397,32 @@
         }, 1200);
     }
 
+    function toggleMenu() {
+        const menu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('menuOverlay');
+        menu.classList.toggle('open');
+        overlay.classList.toggle('open');
+    }
+
+    function switchChannel(channelId, event) {
+        document.getElementById('channel-hinatazaka-ch').style.display = 'none';
+        document.getElementById('channel-hinatazaka-46').style.display = 'none';
+        document.getElementById('channel-' + channelId).style.display = 'block';
+
+        const tabs = document.querySelectorAll('.channel-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+    }
+
     function scrollVideoSlider(direction) {
         const slider = document.getElementById('videoSlider');
         const scrollAmount = slider.clientWidth * 0.8;
+        slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+
+    function scrollVideoList(sliderId, direction) {
+        const slider = document.getElementById(sliderId);
+        const scrollAmount = 300;
         slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
 
