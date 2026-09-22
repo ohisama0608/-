@@ -33,7 +33,7 @@
     .link-btn { display: block; text-align: center; background-color: #ff69b4; color: white; text-decoration: none; padding: 12px; border-radius: 8px; margin: 15px 0; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.3s; cursor: pointer; border: none; width: 100%; box-sizing: border-box; font-size: 1rem; }
     .link-btn:hover { background-color: #ff1493; }
 
-    .petal { position: absolute; background-color: #fff; border-radius: 150% 0 150% 0; transform: rotate(45deg); box-shadow: 0 0 10px rgba(255,183,197,0.5); animation: fall linear infinite, sway ease-in-out infinite alternate; }
+    .petal { position: absolute; background-color: #fff; border-radius: 150% 0 150% 0; transform: rotate(45deg); box-shadow: 0 0 5px rgba(255,183,197,0.3); animation: fall linear infinite, sway ease-in-out infinite alternate; will-change: transform, top; }
     @keyframes fall { 0% { top: -10%; } 100% { top: 110%; } }
     @keyframes sway { 0% { transform: translateX(0px) rotate(45deg); } 100% { transform: translateX(50px) rotate(90deg); } }
     
@@ -357,7 +357,7 @@
     <a href="https://store.plusmember.jp/hinatazaka46/products/list.php?name=%E6%9D%BE%E5%B0%BE%E3%80%80%E6%A1%9C" target="_blank" class="link-btn">ランダムグッズ等その他を見る</a>
     <button onclick="showPage('home')" class="link-btn" style="margin-top:20px;">ホームに戻る</button>
 </div>
-    
+
 <div id="page-app-detail" class="container" style="display: none;">
     <h2>メッセージアプリ</h2>
     <p>メンバーからの着信や日常のメッセージを受け取れます。</p>
@@ -448,7 +448,8 @@
     }
 
     const splash = document.getElementById('splash');
-    for (let i = 0; i < 30; i++) {
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < 15; i++) {
         const petal = document.createElement('div');
         petal.className = 'petal';
         
@@ -464,10 +465,11 @@
         petal.style.animationDuration = animationDuration + 's, ' + swayDuration + 's';
         petal.style.animationDelay = delay + 's, ' + delay + 's';
         
-        splash.appendChild(petal);
+        fragment.appendChild(petal);
     }
+    splash.appendChild(fragment);
 
-    fetch('blog_data.json')
+    fetch('blog_data.json?t=' + new Date().getTime())
         .then(response => response.json())
         .then(data => {
             if(data.date && data.title && data.link) {
