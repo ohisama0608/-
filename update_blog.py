@@ -22,27 +22,48 @@ try:
         html = response.read().decode('utf-8')
         print(f"HTML length: {len(html)}")
         
-        links = re.findall(r'<a href="(/s/official/diary/detail/\d+\?ima=\d+&ct=\d+)">', html)
-        images = re.findall(r'<img[^>]+src="(https://cdn\.hinatazaka46\.com/files/\d+/diary/official/member/moblog/[^"]+)"', html)
-        titles = re.findall(r'<div class="title"[^>]*>(.*?)<\/div>', html)
+        # より柔軟な条件でブログ詳細へのリンクを抽出
+        links = re.findall(r'href="(/s/official/diary/detail/\d+[^"]*)"', html)
+        
+        # 画像の抽出
+        images = re.findall(r'src="(https://cdn\.hinatazaka46\.com/files/\d+/diary/[^"]+)"', html)
+        if not images:
+            images = re.findall(r'src="(https?://[^"]+?/diary/[^"]+?\.(?:jpg|jpeg|png))"', html, re.IGNORECASE)
+            
+        # タイトルの抽出
+        titles = re.findall(r'<div[^>]*class="[^"]*title[^"]*"[^>]*>(.*?)</div>', html, re.DOTALL)
         if not titles:
-            titles = re.findall(r'<p class="title"[^>]*>(.*?)<\/p>', html)
-        dates = re.findall(r'<p class="date path"[^>]*>(.*?)<\/p>', html)
+            titles = re.findall(r'<p[^>]*class="[^"]*title[^"]*"[^>]*>(.*?)</p>', html, re.DOTALL)
+        if not titles:
+            titles = re.findall(r'<h3[^>]*>(.*?)</h3>', html, re.DOTALL)
+
+        # 日付の抽出
+        dates = re.findall(r'<p[^>]*class="[^"]*date[^"]*"[^>]*>(.*?)</p>', html, re.DOTALL)
+        if not dates:
+            dates = re.findall(r'<div[^>]*class="[^"]*date[^"]*"[^>]*>(.*?)</div>', html, re.DOTALL)
         
-        print(f"Found links: {len(links)}, titles: {len(titles)}, dates: {len(dates)}")
+        print(f"Found links: {len(links)}, images: {len(images)}, titles: {len(titles)}, dates: {len(dates)}")
         
+        if links:
+            unique_links = []
+            for l in links:
+                if l not in unique_links:
+                    unique_links.append(l)
+            data["link"] = "https://www.hinatazaka46.com" + unique_links[0]
+            
         if titles:
             clean_title = re.sub(r'<[^>]+>', '', titles[0]).strip()
             if clean_title:
                 data["title"] = clean_title
+                
         if dates:
             clean_date = re.sub(r'<[^>]+>', '', dates[0]).strip()
             if clean_date:
                 data["date"] = clean_date
-        if links:
-            data["link"] = "https://www.hinatazaka46.com" + links[0]
+                
         if images:
             data["image"] = images[0]
+            
 except Exception as e:
     print(f"Error fetching blog: {e}")
     raise e
