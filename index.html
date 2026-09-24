@@ -33,9 +33,12 @@
     .link-btn { display: block; text-align: center; background-color: #ff69b4; color: white; text-decoration: none; padding: 12px; border-radius: 8px; margin: 15px 0; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.3s; cursor: pointer; border: none; width: 100%; box-sizing: border-box; font-size: 1rem; }
     .link-btn:hover { background-color: #ff1493; }
 
-    .petal { position: absolute; background-color: #fff; border-radius: 150% 0 150% 0; transform: rotate(45deg); box-shadow: 0 0 5px rgba(255,183,197,0.3); animation: fall linear infinite, sway ease-in-out infinite alternate; will-change: transform, top; }
-    @keyframes fall { 0% { top: -10%; } 100% { top: 110%; } }
-    @keyframes sway { 0% { transform: translateX(0px) rotate(45deg); } 100% { transform: translateX(50px) rotate(90deg); } }
+    .petal { position: absolute; background-color: #fff; border-radius: 150% 0 150% 0; box-shadow: 0 0 5px rgba(255,183,197,0.3); animation: fallAnimation linear infinite; will-change: transform; }
+    @keyframes fallAnimation {
+        0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0.8; }
+        50% { transform: translate3d(30px, 50vh, 0) rotate(180deg); opacity: 1; }
+        100% { transform: translate3d(-20px, 110vh, 0) rotate(360deg); opacity: 0.5; }
+    }
     
     .streaming-btn { display: block; text-align: center; color: white; text-decoration: none; padding: 12px; border-radius: 8px; margin: 15px 0; font-weight: bold; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: background-color 0.3s; }
     .tver-color { background-color: #43b5e4; }
@@ -449,21 +452,20 @@
 
     const splash = document.getElementById('splash');
     const fragment = document.createDocumentFragment();
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 12; i++) {
         const petal = document.createElement('div');
         petal.className = 'petal';
         
-        const size = Math.random() * 15 + 10;
+        const size = Math.random() * 12 + 8;
         const left = Math.random() * 100;
-        const animationDuration = Math.random() * 3 + 3;
-        const swayDuration = Math.random() * 2 + 1;
+        const animationDuration = Math.random() * 2 + 2;
         const delay = Math.random() * 2;
         
         petal.style.width = size + 'px';
         petal.style.height = size + 'px';
         petal.style.left = left + 'vw';
-        petal.style.animationDuration = animationDuration + 's, ' + swayDuration + 's';
-        petal.style.animationDelay = delay + 's, ' + delay + 's';
+        petal.style.animationDuration = animationDuration + 's';
+        petal.style.animationDelay = delay + 's';
         
         fragment.appendChild(petal);
     }
